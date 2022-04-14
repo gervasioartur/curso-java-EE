@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="img/favicon.png">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<title>Agenda de contatos</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Criar novo contato</h1>
+	<form name="fomrContact"action">
+		<table>
+			<tr>
+				<td><input type="text" name="name"
+					placeholder="Introduza o nome" class="caixa1"></td>
+			</tr>
+
+			<tr>
+				<td><input type="email" name="email" class="caixa1"
+					placeholder="Introduza o email"></td>
+			</tr>
+
+			<tr>
+				<td><input type="text" name="phone"
+					placeholder="Introduza o nr de celular" class="caixa2"></td>
+			</tr>
+		</table>
+		<input class="botao-1" type="button" value="enviar" onclick="validate()">
+	</form>
+	<script src="scripts/validation.js"></script>
+</body>
+</html>
