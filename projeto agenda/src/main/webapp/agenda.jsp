@@ -33,9 +33,12 @@ ArrayList<JavaBeans> contacts = (ArrayList<JavaBeans>) request.getAttribute("con
 			<tr>
 				<td><%=contact.getId()%></td>
 				<td><%=contact.getName()%></td>
-				<td><%=contact.getName()%></td>
 				<td><%=contact.getPhone()%></td>
-				<td><a class="botao-1" href="editOP?id=<%=contact.getId()%>">Editar</a></td>
+				<td><%=contact.getEmail()%></td>
+				<td>
+				<a class="botao-1" href="editOP?id=<%=contact.getId()%>">Editar</a> <a class="botao-1" href="delete?id=<%=contact.getId()%>">Apagar</a>
+				
+				</td>
 			</tr>
 			<%}%>
 		</tbody>

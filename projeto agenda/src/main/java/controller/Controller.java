@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
-@WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/editOP", "/edit" })
+@WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/editOP", "/edit", "/delete" })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAO dao = new DAO();
@@ -33,7 +33,10 @@ public class Controller extends HttpServlet {
 			edit(request, response);
 		} else if (action.equals("/edit")) {
 			update(request, response);
+		} else if (action.equals("/delete")) {
+			delete(request, response);
 		}
+
 	}
 
 	// listar contatod
@@ -78,4 +81,10 @@ public class Controller extends HttpServlet {
 		response.sendRedirect("main");
 	}
 
+	protected void delete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String id = request.getParameter("id");
+		dao.remove(id);
+		response.sendRedirect("main");
+	}
 }

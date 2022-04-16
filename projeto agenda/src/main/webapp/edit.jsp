@@ -35,7 +35,7 @@ JavaBeans contact = (JavaBeans) request.getAttribute("contact");
 						name="name" 
 						class="caixa1"
 						placeholder="Introduza o nome" 
-						value=<%=contact.getName()%>
+						value="<%=contact.getName()%>"
 					/>
 				</td>
 			</tr>

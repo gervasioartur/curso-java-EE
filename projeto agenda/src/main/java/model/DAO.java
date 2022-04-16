@@ -118,4 +118,18 @@ public class DAO {
 			System.out.println(e);
 		}
 	}
+
+	public void remove(String idParam) {
+		JavaBeans contact = new JavaBeans();
+		String select = "delete  from contacts  where contacts.id = ?";
+		try {
+			Connection conn = conect();
+			PreparedStatement pst = conn.prepareStatement(select);
+			pst.setString(1, idParam);
+			pst.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 }
