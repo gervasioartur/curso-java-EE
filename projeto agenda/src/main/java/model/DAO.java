@@ -2,6 +2,9 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class DAO {
 
@@ -22,6 +25,51 @@ public class DAO {
 		} catch (Exception e) {
 			System.out.println(e);
 			return null;
+		}
+	}
+
+	// list all
+	public ArrayList<JavaBeans> listAllContacts() {
+		ArrayList<JavaBeans> contacts = new ArrayList();
+		String select = "select * from contacts order by name";
+		try {
+			Connection conn = conect();
+			PreparedStatement pst = conn.prepareStatement(select);
+			ResultSet rs = pst.executeQuery();
+
+			while (rs.next()) {
+				String id = rs.getString(1);
+				String name = rs.getString(2);
+				String phone = rs.getString(3);
+				String email = rs.getString(4);
+				contacts.add(new JavaBeans(id, name, phone, email));
+			}
+			conn.close();
+			return contacts;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
+	// crud create
+	public void insertContact(JavaBeans contact) {
+		String create = "insert into contacts (name, email,phone) values (?,?,?)";
+
+		try {
+			// abir a conexao
+			Connection conn = conect();
+			// prepared statement
+			PreparedStatement pst = conn.prepareStatement(create);
+			pst.setString(1, contact.getName());
+			pst.setString(2, contact.getEmail());
+			pst.setString(3, contact.getPhone());
+			pst.executeUpdate();
+			// fechando a conexao
+			conn.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 	}
 }

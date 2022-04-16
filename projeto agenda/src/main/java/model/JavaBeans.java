@@ -1,7 +1,7 @@
 package model;
 
 public class JavaBeans {
-	private String idCon;
+	private String id;
 	private String name;
 	private String phone;
 	private String email;
@@ -13,14 +13,14 @@ public class JavaBeans {
 
 	public JavaBeans(String idCon, String name, String phone, String email) {
 		super();
-		this.idCon = idCon;
+		this.id = idCon;
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
 	}
 	
-	public String getIdCon() {
-		return idCon;
+	public String getId() {
+		return id;
 	}
 	
 	public String getName() {
