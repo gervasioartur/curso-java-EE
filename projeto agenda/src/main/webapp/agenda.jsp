@@ -18,13 +18,14 @@ ArrayList<JavaBeans> contacts = (ArrayList<JavaBeans>) request.getAttribute("con
 <body>
 	<h1>Agenda de contatos</h1>
 	<a href="novo.html" class="botao-1">Novo contato</a>
-	<table>
+	<table id="tabela">
 		<thead>
 			<tr>
 				<th>Id</th>
 				<th>Name</th>
 				<th>Phone</th>
 				<th>E-mail</th>
+				<th>Opcoes</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,6 +35,7 @@ ArrayList<JavaBeans> contacts = (ArrayList<JavaBeans>) request.getAttribute("con
 				<td><%=contact.getName()%></td>
 				<td><%=contact.getName()%></td>
 				<td><%=contact.getPhone()%></td>
+				<td><a class="botao-1" href="editOP?id=<%=contact.getId()%>">Editar</a></td>
 			</tr>
 			<%}%>
 		</tbody>

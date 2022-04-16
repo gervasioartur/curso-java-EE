@@ -29,9 +29,9 @@ public class DAO {
 	}
 
 	// list all
-	public ArrayList<JavaBeans> listAllContacts() {
+	public ArrayList<JavaBeans> getAll() {
 		ArrayList<JavaBeans> contacts = new ArrayList();
-		String select = "select * from contacts order by name";
+		String select = "select * from contacts order by id";
 		try {
 			Connection conn = conect();
 			PreparedStatement pst = conn.prepareStatement(select);
@@ -53,7 +53,7 @@ public class DAO {
 	}
 
 	// crud create
-	public void insertContact(JavaBeans contact) {
+	public void store(JavaBeans contact) {
 		String create = "insert into contacts (name, email,phone) values (?,?,?)";
 
 		try {

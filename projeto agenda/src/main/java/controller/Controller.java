@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
-@WebServlet(urlPatterns = { "/Controller", "/main", "/insert" })
+@WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/editOP" })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAO dao = new DAO();
@@ -26,35 +26,39 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getServletPath();
 		if (action.equals("/main")) {
-			contatcs(request, response);
-		} else {
-			if (action.equals("/insert")) {
-				newContact(request, response);
-			}
+			index(request, response);
+		} else if (action.equals("/insert")) {
+			store(request, response);
+		} else if (action.equals("/editOP")) {
+			edit(request, response);
 		}
-
 	}
 
 	// listar contatod
-	protected void contatcs(HttpServletRequest request, HttpServletResponse response)
+	protected void index(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ArrayList<JavaBeans> contacts = dao.listAllContacts();
+		ArrayList<JavaBeans> contacts = dao.getAll();
 		request.setAttribute("contacts", contacts);
 		RequestDispatcher rd = request.getRequestDispatcher("agenda.jsp");
 		rd.forward(request, response);
 	}
 
 	// novo contato
-	protected void newContact(HttpServletRequest request, HttpServletResponse response)
+	protected void store(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		contact.setName(request.getParameter("name"));
 		contact.setEmail(request.getParameter("email"));
 		contact.setPhone(request.getParameter("phone"));
 
 		// invocando metodo de insercao
-		dao.insertContact(contact);
+		dao.store(contact);
 		// redirecionando
 		response.sendRedirect("main");
+	}
+
+	protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		System.out.println(id);
 	}
 
 }
