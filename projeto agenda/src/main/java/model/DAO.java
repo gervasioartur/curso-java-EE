@@ -72,4 +72,50 @@ public class DAO {
 			System.out.println(e);
 		}
 	}
+
+	public JavaBeans getById(String idParam) {
+		JavaBeans contact = new JavaBeans();
+		String select = "select * from contacts  where contacts.id = ?";
+		try {
+			Connection conn = conect();
+			PreparedStatement pst = conn.prepareStatement(select);
+			pst.setString(1, idParam);
+
+			ResultSet rs = pst.executeQuery();
+
+			while (rs.next()) {
+				String id = rs.getString(1);
+				String name = rs.getString(2);
+				String phone = rs.getString(3);
+				String email = rs.getString(4);
+				contact = new JavaBeans(id, name, phone, email);
+			}
+			conn.close();
+			return contact;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
+	public void update(JavaBeans contact) {
+		String create = "update contacts set contacts.name = ?, contacts.email = ?, contacts.phone = ? where contacts.id = ?";
+
+		try {
+			// abir a conexao
+			Connection conn = conect();
+			// prepared statement
+			PreparedStatement pst = conn.prepareStatement(create);
+			pst.setString(1, contact.getName());
+			pst.setString(2, contact.getEmail());
+			pst.setString(3, contact.getPhone());
+			pst.setString(4, contact.getId());
+			pst.executeUpdate();
+			// fechando a conexao
+			conn.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 }

@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
-@WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/editOP" })
+@WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/editOP", "/edit" })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAO dao = new DAO();
@@ -31,6 +31,8 @@ public class Controller extends HttpServlet {
 			store(request, response);
 		} else if (action.equals("/editOP")) {
 			edit(request, response);
+		} else if (action.equals("/edit")) {
+			update(request, response);
 		}
 	}
 
@@ -58,7 +60,22 @@ public class Controller extends HttpServlet {
 
 	protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		System.out.println(id);
+		JavaBeans contact = dao.getById(id);
+
+		request.setAttribute("contact", contact);
+		RequestDispatcher rd = request.getRequestDispatcher("edit.jsp");
+		rd.forward(request, response);
+	}
+
+	protected void update(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		contact.setId(request.getParameter("id"));
+		contact.setName(request.getParameter("name"));
+		contact.setEmail(request.getParameter("email"));
+		contact.setPhone(request.getParameter("phone"));
+
+		dao.update(contact);
+		response.sendRedirect("main");
 	}
 
 }
